@@ -26,6 +26,9 @@ export class ChinesePuzzleBoardComponent {
   boardWidth = this.store.boardWidth();
   boardHeight = this.store.boardHeight();
 
+  dataSetNames = this.store.dataSetNames;
+  dataSetName = this.store.dataSetName;
+
   pieces = this.store.pieces;
   boardState = this.store.board;
   finished = this.store.finished;
@@ -177,5 +180,10 @@ export class ChinesePuzzleBoardComponent {
     }
 
     this.resetClickOrDragState();
+  }
+
+  chnageDataSet(dataSetName: string) {
+    this.store.chnageDataSet(dataSetName);
+    this.steps = 0;
   }
 }

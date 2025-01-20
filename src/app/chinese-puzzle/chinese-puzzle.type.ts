@@ -20,4 +20,3 @@ export enum Direction {
   Right = 'right',
 }
 
-
