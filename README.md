@@ -24,3 +24,7 @@
 ### 六角跳跳棋
 
 ![六角跳跳棋](./public/assets/img/snip/hexxagon.png)
+
+### 推箱子
+
+![推箱子](./public/assets/img/snip/sokoban.png)
