@@ -1,6 +1,5 @@
 @if (cell) {
-<div class="w-10 h-10 flex justify-center items-center"
+<div class="w-20 h-20 flex justify-center items-center select-none"
   [ngClass]="{'wall':cell.type==CellType.Wall,'box':cell.type==CellType.Box,'target':cell.type==CellType.Target,'player':cell.type==CellType.Player,'empty':cell.type==CellType.Empty}">
-  {{cell.value}}
 </div>
 }
