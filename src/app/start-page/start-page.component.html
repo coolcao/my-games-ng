@@ -1,0 +1,19 @@
+<div class="w-screen h-screen flex justify-center items-center bg-gray-200 dark:bg-gray-800">
+  <div
+    class="w-1/2 h-1/2 min-w-[450px] max-w-[800px] min-h-[450px] max-h-[800px] flex flex-col justify-center items-center text-gray-600 dark:text-gray-200">
+    <div class="text-xl my-5">本项目是主要用于学习的一个Angular实现的游戏集合。主要有以下几个游戏：</div>
+    <div class="w-full h-full  grid grid-cols-3 gap-5">
+      @for (g of games; track $index) {
+      <div [routerLink]="[g.path]"
+        class="w-[200px] h-[200px] m-1 cursor-pointer border-2 border-solid border-gray-400 shadow-lg transition-all duration-500 ease-in-out transform hover:scale-105 hover:shadow-2xl select-none flex justify-center items-center bg-gray-500 dark:bg-gray-600 text-gray-200 dark:text-gray-400 rounded-md">
+        <div class="absolute top-0 left-0 w-full h-full rounded-md">
+          <img class="w-full h-full rounded-md" [src]="g.backgroundImage"/>
+        </div>
+        <div class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-25 flex justify-center items-end rounded-md backdrop-blur">
+          <a class="w-full h-full flex justify-center items-center bg-gray-600 text-gray-200 bg-opacity-70">{{g.name}}</a>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</div>

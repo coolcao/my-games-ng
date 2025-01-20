@@ -1,0 +1,45 @@
+<div class="w-screen h-screen bg-gray-200 dark:bg-gray-800 flex flex-col justify-center items-center">
+  <div class="text-5xl text-gray-800 dark:text-gray-200">井字棋</div>
+  <div class="text-xl mt-5 text-gray-800 dark:text-gray-200">游戏玩法：双方轮流在3乘3的格上下棋，最先以横、直、斜连成一线则为胜。</div>
+  <div id="tic-tac-toe-board" class="flex flex-col justify-center items-center w-2/3 h-2/3 min-w-[400px] min-h-[400px]">
+    @for (cs of cells(); let last=$last;track $index;) {
+    <div class="flex justify-center items-center border-gray-500" [ngClass]="{'border-b-0': last, 'border-b-2': !last}">
+      @for (item of cs; let last=$last;track $index) {
+      <div (click)="clickCell(item)" [ngClass]="{'border-r-0': last, 'border-r-2': !last}"
+        class="group w-[100px] h-[100px] border-r-2 border-gray-500 flex justify-center items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700">
+        @if (item.player?.color) {
+        <span class="text-5xl">{{item.player?.color}}</span>
+        } @else {
+        <span class="invisible group-hover:visible text-opacity-50 opacity-50">{{currentPlayer().color}}</span>
+        }
+
+      </div>
+      }
+    </div>
+    }
+    <div class="mt-5 text-xl text-gray-800 dark:text-gray-200">当前玩家: {{currentPlayer().color}}</div>
+  </div>
+</div>
+
+@if (winner()) {
+<div
+  class="w-screen h-screen bg-gray-200/50 dark:bg-gray-800/50 absolute top-0 left-0 flex justify-center items-center backdrop-blur">
+  <div class="w-96 h-96 flex flex-col justify-center items-center text-gray-800 dark:text-gray-200">
+    <span class="text-3xl my-5">🎉🎉🎉恭喜🎉🎉🎉</span>
+    <span class="text-3xl my-5"> {{winner()!.color}} {{winner()!.name}}获胜</span>
+    <button
+      class="text-2xl px-5 py-5 bg-blue-400 dark:bg-blue-600 hover:bg-blue-300 dark:hover:bg-blue-500 border border-blue-500 rounded"
+      (click)="restart()">重新开始</button>
+  </div>
+</div>
+} @else if (count() == 9) {
+<div
+  class="w-screen h-screen bg-gray-200/50 dark:bg-gray-800/50 absolute top-0 left-0 flex justify-center items-center backdrop-blur">
+  <div class="w-96 h-96 flex flex-col justify-center items-center text-gray-800 dark:text-gray-200">
+    <span class="text-3xl my-5">😄😄😄平局😄😄😄</span>
+    <button
+      class="text-2xl px-5 py-5 bg-blue-400 dark:bg-blue-600 hover:bg-blue-300 dark:hover:bg-blue-500 border border-blue-500 rounded"
+      (click)="restart()">再来一局吧</button>
+  </div>
+</div>
+}
