@@ -1,0 +1,23 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { SokobanRoutingModule } from './sokoban-routing.module';
+import { SokobanBoardComponent } from './sokoban-board/sokoban-board.component';
+import { SokobanStore } from './sokoban.store';
+import { SokobanCellComponent } from './sokoban-cell/sokoban-cell.component';
+
+
+@NgModule({
+  declarations: [
+    SokobanBoardComponent,
+    SokobanCellComponent
+  ],
+  imports: [
+    CommonModule,
+    SokobanRoutingModule
+  ],
+  providers: [
+    SokobanStore
+  ],
+})
+export class SokobanModule { }

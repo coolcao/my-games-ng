@@ -15,6 +15,7 @@ export class StartPageComponent {
     { name: '井字棋游戏', path: 'tic-tac-toe', backgroundImage: 'assets/img/snip/tic-tac-toe.png' },
     { name: '华容道', path: 'chinese-puzzle', backgroundImage: 'assets/img/snip/chinese-puzzle.png' },
     { name: '六角跳跳棋', path: 'hexxagon', backgroundImage: 'assets/img/snip/hexxagon.png' },
+    { name: '推箱子', path: 'sokoban', backgroundImage: 'assets/img/snip/sokoban.png' },
   ];
 
 }

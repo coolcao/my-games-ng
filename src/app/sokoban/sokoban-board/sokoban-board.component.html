@@ -1,0 +1,16 @@
+<div class="w-screen h-screen flex flex-col justify-center items-center">
+  <div class="w-full h-full flex flex-col justify-center items-center">
+    <div class="my-5">是否完成：{{finished()?'✅':'❌'}}</div>
+    <div class="w-9/12 flex justify-center items-center">
+      <div class="flex flex-col board">
+        @for (rows of board(); track $index; let row = $index) {
+        <div class="w-full h-10 flex justify-center items-center">
+          @for (col of rows; track $index) {
+          <app-sokoban-cell [cell]="col"></app-sokoban-cell>
+          }
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>

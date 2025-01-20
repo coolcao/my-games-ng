@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: 'tic-tac-toe', loadChildren: () => import('./tic-tac-toe/tic-tac-toe.module').then(m => m.TicTacToeModule) },
   { path: 'chinese-puzzle', loadChildren: () => import('./chinese-puzzle/chinese-puzzle.module').then(m => m.ChinesePuzzleModule) },
   { path: 'hexxagon', loadChildren: () => import('./hexxagon/hexxagon.module').then(m => m.HexxagonModule) },
+  { path: 'sokoban', loadChildren: () => import('./sokoban/sokoban.module').then(m => m.SokobanModule) },
 ];
 
 @NgModule({
