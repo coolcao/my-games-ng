@@ -100,9 +100,14 @@ export class SokobanBoardComponent implements OnInit {
     return false;
   }
 
-  chnageDataSet(dataSetName: string): void {
+  changeDataSet(dataSetName: string): void {
     this.store.updateDataSetName(dataSetName);
     this.store.initBoard();
+  }
+
+  onDataSetChange(event: Event): void {
+    // 让select失去焦点，避免select组件捕获到keydown事件
+    (event.target as HTMLSelectElement).blur();
   }
 
 
