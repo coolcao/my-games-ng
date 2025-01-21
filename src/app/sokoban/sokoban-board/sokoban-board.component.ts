@@ -52,12 +52,12 @@ export class SokobanBoardComponent implements OnInit {
     const newX = this.playerPosition().x + dx;
     const newY = this.playerPosition().y + dy;
 
-    if (this.isValidMove(newX, newY)) {
+    if (this.isValidMove(newX, newY, CellType.Player)) {
       let board = this.board();
       if (board.get(newX)!.get(newY)!.type === CellType.Box) {
         const newBoxX = newX + dx;
         const newBoxY = newY + dy;
-        if (this.isValidMove(newBoxX, newBoxY)) {
+        if (this.isValidMove(newBoxX, newBoxY, CellType.Box)) {
           // 移动箱子，并保留目标点位信息
           board = board.set(newBoxX, board.get(newBoxX)!.set(newBoxY, { ...CELL.BOX, isTarget: board.get(newBoxX)!.get(newBoxY)!.isTarget }));
           // 恢复原位置状态(如果是目标点位，则恢复为目标点位)
@@ -86,14 +86,18 @@ export class SokobanBoardComponent implements OnInit {
     }
   }
 
-  isValidMove(x: number, y: number): boolean {
-    return (
-      x >= 0 &&
-      x < this.board().size &&
-      y >= 0 &&
-      y < this.board().first()!.size &&
-      this.board().get(x)?.get(y)?.type !== CellType.Wall
-    );
+  isValidMove(x: number, y: number, cellType: CellType): boolean {
+    const rows = this.board().size;
+    const cols = this.board().first()?.size;
+    const cell = this.board().get(x)?.get(y);
+    if (!rows || !cols || !cell) return false;
+    if (cellType == CellType.Player) {
+      return (x >= 0 && x < rows && y >= 0 && y < cols && cell.type != CellType.Wall);
+    }
+    if (cellType == CellType.Box) {
+      return (x >= 0 && x < rows && y >= 0 && y < cols && cell.type != CellType.Wall && cell.type != CellType.Box);
+    }
+    return false;
   }
 
   chnageDataSet(dataSetName: string): void {
