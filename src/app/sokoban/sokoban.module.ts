@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { SokobanRoutingModule } from './sokoban-routing.module';
 import { SokobanBoardComponent } from './sokoban-board/sokoban-board.component';
@@ -14,7 +15,8 @@ import { SokobanCellComponent } from './sokoban-cell/sokoban-cell.component';
   ],
   imports: [
     CommonModule,
-    SokobanRoutingModule
+    SokobanRoutingModule,
+    FormsModule,
   ],
   providers: [
     SokobanStore

@@ -1,6 +1,7 @@
 import { Component, HostListener, inject, OnInit } from '@angular/core';
-import { BOX, EMPTY, PLAYER, SokobanStore, TARGET } from '../sokoban.store';
+import { SokobanStore } from '../sokoban.store';
 import { CellType } from '../sokoban.type';
+import { CELL, dataSetNames } from '../sokoban.data';
 
 @Component({
   selector: 'app-sokoban-board',
@@ -13,7 +14,10 @@ export class SokobanBoardComponent implements OnInit {
   board = this.store.board;
   playerPosition = this.store.position;
   targetPositions = this.store.targetPositions;
-  finished = this.store.finished
+  finished = this.store.finished;
+  dataSetName = this.store.dataSetName;
+
+  dataSetNames = dataSetNames;
 
   ngOnInit(): void {
     this.store.initBoard();
@@ -55,27 +59,27 @@ export class SokobanBoardComponent implements OnInit {
         const newBoxY = newY + dy;
         if (this.isValidMove(newBoxX, newBoxY)) {
           // 移动箱子，并保留目标点位信息
-          board = board.set(newBoxX, board.get(newBoxX)!.set(newBoxY, { ...BOX, isTarget: board.get(newBoxX)!.get(newBoxY)!.isTarget }));
+          board = board.set(newBoxX, board.get(newBoxX)!.set(newBoxY, { ...CELL.BOX, isTarget: board.get(newBoxX)!.get(newBoxY)!.isTarget }));
           // 恢复原位置状态(如果是目标点位，则恢复为目标点位)
           if (this.targetPositions().find(p => p.x == newX && p.y == newY)) {
-            board = board.set(newX, board.get(newX)!.set(newY, { ...TARGET, isTarget: true }));
+            board = board.set(newX, board.get(newX)!.set(newY, { ...CELL.TARGET, isTarget: true }));
           } else {
-            board = board.set(newX, board.get(newX)!.set(newY, { ...EMPTY }));
+            board = board.set(newX, board.get(newX)!.set(newY, { ...CELL.EMPTY }));
           }
           // 移动玩家
-          board = board.set(this.playerPosition().x, board.get(this.playerPosition().x)!.set(this.playerPosition().y, { ...EMPTY }));
-          board = board.set(newX, board.get(newX)!.set(newY, { ...PLAYER }));
+          board = board.set(this.playerPosition().x, board.get(this.playerPosition().x)!.set(this.playerPosition().y, { ...CELL.EMPTY }));
+          board = board.set(newX, board.get(newX)!.set(newY, { ...CELL.PLAYER }));
           this.store.updatePosition(newX, newY);
           this.store.updateBoard(board);
         }
       } else {
         let board = this.board();
         if (this.targetPositions().find(p => p.x == this.playerPosition().x && p.y == this.playerPosition().y)) {
-          board = board.set(this.playerPosition().x, board.get(this.playerPosition().x)!.set(this.playerPosition().y, { ...TARGET, isTarget: true }));
+          board = board.set(this.playerPosition().x, board.get(this.playerPosition().x)!.set(this.playerPosition().y, { ...CELL.TARGET, isTarget: true }));
         } else {
-          board = board.set(this.playerPosition().x, board.get(this.playerPosition().x)!.set(this.playerPosition().y, { ...EMPTY }));
+          board = board.set(this.playerPosition().x, board.get(this.playerPosition().x)!.set(this.playerPosition().y, { ...CELL.EMPTY }));
         }
-        board = board.set(newX, board.get(newX)!.set(newY, { ...PLAYER }));
+        board = board.set(newX, board.get(newX)!.set(newY, { ...CELL.PLAYER }));
         this.store.updatePosition(newX, newY);
         this.store.updateBoard(board);
       }
@@ -90,6 +94,11 @@ export class SokobanBoardComponent implements OnInit {
       y < this.board().first()!.size &&
       this.board().get(x)?.get(y)?.type !== CellType.Wall
     );
+  }
+
+  chnageDataSet(dataSetName: string): void {
+    this.store.updateDataSetName(dataSetName);
+    this.store.initBoard();
   }
 
 
