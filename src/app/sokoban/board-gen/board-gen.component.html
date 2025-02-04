@@ -1,5 +1,28 @@
-<div class="w-screen h-screen flex flex-col justify-center items-center">
-  <div class="w-full h-20 flex justify-center items-center text-2xl text-zinc-600">推箱子地图生成器</div>
+<div class="w-screen h-screen flex flex-col justify-center items-center dark:bg-gray-800">
+  <div class="w-full h-20 flex justify-center items-center text-2xl text-zinc-600 dark:text-zinc-200">推箱子地图生成器</div>
+  <div class="w-full flex justify-center items-center text-zinc-600 dark:text-zinc-200">
+    <div class="w-1/2 flex justify-end items-center mr-5">
+      行数:
+      <select [(ngModel)]="rows" (ngModelChange)="onRowsColsChange()"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        <option [value]="8">8</option>
+        <option [value]="9">9</option>
+        <option [value]="10">10</option>
+        <option [value]="11">11</option>
+        <option [value]="12">12</option>
+      </select>
+    </div>
+    <div class="w-1/2 flex justify-start items-center ml-5">列数:
+      <select [(ngModel)]="cols" (ngModelChange)="onRowsColsChange()"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        <option [value]="8">8</option>
+        <option [value]="9">9</option>
+        <option [value]="10">10</option>
+        <option [value]="11">11</option>
+        <option [value]="12">12</option>
+      </select>
+    </div>
+  </div>
   <div class="w-full h-20 flex justify-center items-center my-10">
     @for (cell of cells; track $index) {
     <div class="w-20 h-20 m-5 cursor-pointer" [ngClass]="{'border border-solid border-gray-500': cell==EMPTY}"
@@ -16,14 +39,14 @@
       <div class="w-20 h-20 flex justify-center items-center">
         <div class="cursor-pointer" (click)="setCell(row, col)">
           <app-sokoban-cell [cell]="item"
-            class="bg-white border border-black w-20 h-20 cursor-pointer"></app-sokoban-cell>
+            class="bg-white dark:bg-gray-800 border border-gray-800 dark:border-gray-200 w-20 h-20 cursor-pointer"></app-sokoban-cell>
         </div>
       </div>
       }
     </div>
     }
   </div>
-  <code class="mx-10 my-10 p-4 border border-solid border-zinc-200 rounded-md bg-gray-100 cursor-pointer" (click)="copyJSON()">
+  <code class="mx-10 my-10 p-4 border border-solid border-zinc-200 rounded-md text-zinc-600 dark:text-zinc-200 bg-gray-100 dark:bg-gray-600 cursor-pointer" (click)="copyJSON()">
     {{getJSON()}}
   </code>
 </div>
