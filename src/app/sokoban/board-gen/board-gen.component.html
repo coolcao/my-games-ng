@@ -1,0 +1,29 @@
+<div class="w-screen h-screen flex flex-col justify-center items-center">
+  <div class="w-full h-20 flex justify-center items-center text-2xl text-zinc-600">推箱子地图生成器</div>
+  <div class="w-full h-20 flex justify-center items-center my-10">
+    @for (cell of cells; track $index) {
+    <div class="w-20 h-20 m-5 cursor-pointer" [ngClass]="{'border border-solid border-gray-500': cell==EMPTY}"
+      (click)="selected=cell">
+      <app-sokoban-cell [cell]="cell"></app-sokoban-cell>
+      <span class="flex justify-center items-center" *ngIf="selected==cell">⬆️</span>
+    </div>
+    }
+  </div>
+  <div class="w-full flex flex-col justify-center items-center">
+    @for (items of board; track $index; let row = $index) {
+    <div class="w-full flex justify-center items-center">
+      @for (item of items; track $index; let col = $index) {
+      <div class="w-20 h-20 flex justify-center items-center">
+        <div class="cursor-pointer" (click)="setCell(row, col)">
+          <app-sokoban-cell [cell]="item"
+            class="bg-white border border-black w-20 h-20 cursor-pointer"></app-sokoban-cell>
+        </div>
+      </div>
+      }
+    </div>
+    }
+  </div>
+  <code class="mx-10 my-10 p-4 border border-solid border-zinc-200 rounded-md bg-gray-100 cursor-pointer" (click)="copyJSON()">
+    {{getJSON()}}
+  </code>
+</div>

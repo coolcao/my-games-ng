@@ -6,12 +6,14 @@ import { SokobanRoutingModule } from './sokoban-routing.module';
 import { SokobanBoardComponent } from './sokoban-board/sokoban-board.component';
 import { SokobanStore } from './sokoban.store';
 import { SokobanCellComponent } from './sokoban-cell/sokoban-cell.component';
+import { BoardGenComponent } from './board-gen/board-gen.component';
 
 
 @NgModule({
   declarations: [
     SokobanBoardComponent,
-    SokobanCellComponent
+    SokobanCellComponent,
+    BoardGenComponent
   ],
   imports: [
     CommonModule,
