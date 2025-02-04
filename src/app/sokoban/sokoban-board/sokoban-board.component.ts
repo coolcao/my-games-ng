@@ -67,7 +67,11 @@ export class SokobanBoardComponent implements OnInit {
             board = board.set(newX, board.get(newX)!.set(newY, { ...CELL.EMPTY }));
           }
           // 移动玩家
-          board = board.set(this.playerPosition().x, board.get(this.playerPosition().x)!.set(this.playerPosition().y, { ...CELL.EMPTY }));
+          if (this.targetPositions().find(p => p.x == this.playerPosition().x && p.y == this.playerPosition().y)) {
+            board = board.set(this.playerPosition().x, board.get(this.playerPosition().x)!.set(this.playerPosition().y, { ...CELL.TARGET, isTarget: true }));
+          } else {
+            board = board.set(this.playerPosition().x, board.get(this.playerPosition().x)!.set(this.playerPosition().y, { ...CELL.EMPTY }));
+          }
           board = board.set(newX, board.get(newX)!.set(newY, { ...CELL.PLAYER }));
           this.store.updatePosition(newX, newY);
           this.store.updateBoard(board);
